@@ -9,19 +9,27 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from ImageEditor import Ui_MainWindow
 import mysql.connector as mc
 
 
 class Ui_Form(object):
+
+    def ImageProcessor(self):
+        self.window2 =  QtWidgets.QMainWindow()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self.window2)
+        self.window2.show()
+
     def setupUi(self, Form):
         Form.setObjectName("Form")
         Form.resize(381, 473)
         Form.setMaximumSize(QtCore.QSize(400, 500))
-        Form.setStyleSheet("background-color: rgb(86, 86, 86);")
+        Form.setStyleSheet("background-color: rgb(31, 31, 31);")
         self.horizontalLayout = QtWidgets.QHBoxLayout(Form)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.Background = QtWidgets.QStackedWidget(Form)
-        self.Background.setStyleSheet("background-color: rgb(86, 86, 86);\n"
+        self.Background.setStyleSheet("background-color: rgb(31, 31, 31);\n"
                                       "border: none;")
         self.Background.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.Background.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -137,16 +145,13 @@ class Ui_Form(object):
 
             mydb = mc.connect(
                 host="localhost",
-                port="3306",
                 user="root",
-                password="",
-                database="health"
+                database="health",
+                password="mS50778609@21042001"
             )
 
             mycursor = mydb.cursor()
-            query = "select username, password from radiologists where username like '" + username + "'+and password " \
-                                                                                                     "like '" + \
-                    password + ""
+            query = "SELECT * FROM radiologists WHERE username = '%s' AND radpassword = '%s'" % (username, password)
             mycursor.execute(query)
             result = mycursor.fetchone()
 
@@ -155,12 +160,15 @@ class Ui_Form(object):
 
             else:
                 self.labelResult.setText("You are logged in")
-
-            mycursor.close()
-            mydb.close()
+                self.window2 =  QtWidgets.QMainWindow()
+                self.ui = Ui_MainWindow()
+                self.ui.setupUi(self.window2)
+                self.window2.show()
+                Form.close()
 
         except mc.Error as e:
-            self.labelResult.setText("error")
+            self.labelResult.setText("Cannot connect to server")
+
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
