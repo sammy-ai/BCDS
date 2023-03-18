@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1327, 795)
+        MainWindow.resize(1594, 830)
         MainWindow.setStyleSheet("background-color: rgb(165, 165, 165);\n"
 "color: rgb(255, 255, 255);\n"
 "background-color: rgb(31, 31, 31);")
@@ -132,7 +132,6 @@ class Ui_MainWindow(object):
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setAutoFillBackground(False)
         self.label_2.setText("")
-        self.label_2.setPixmap(QtGui.QPixmap("C:/Users/matab/OneDrive/Pictures/PREMIERE! 2021 AUDI RSQ8-R 740HP - THE NEW MONSTER-SUV FROM ABT SPORTSLINE IN DETAIL.jpeg"))
         self.label_2.setObjectName("label_2")
         self.verticalLayout_2.addWidget(self.label_2)
         self.gridLayout.addLayout(self.verticalLayout_2, 1, 3, 2, 2)
@@ -220,7 +219,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addItem(spacerItem, 1, 2, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1327, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1594, 21))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
