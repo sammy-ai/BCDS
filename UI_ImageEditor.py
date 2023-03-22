@@ -9,6 +9,14 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtGui import QImage
+from PyQt5.QtGui import QPixmap
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
+import numpy as np
+import cv2
+import imutils
 
 
 class Ui_MainWindow(object):
@@ -50,6 +58,7 @@ class Ui_MainWindow(object):
         self.detect_button.setFlat(False)
         self.detect_button.setObjectName("detect_button")
         self.horizontalLayout_2.addWidget(self.detect_button)
+        self.detect_button.clicked.connect(self.scanImage)
         self.generate_report = QtWidgets.QPushButton(self.centralwidget)
         self.generate_report.setMaximumSize(QtCore.QSize(60, 23))
         self.generate_report.setStyleSheet("radius {\n"
@@ -117,6 +126,7 @@ class Ui_MainWindow(object):
         self.insert_new.setFlat(True)
         self.insert_new.setObjectName("insert_new")
         self.horizontalLayout.addWidget(self.insert_new)
+        self.insert_new.clicked.connect(self.loadImage)
         self.open_folder = QtWidgets.QPushButton(self.centralwidget)
         self.open_folder.setMinimumSize(QtCore.QSize(60, 30))
         self.open_folder.setMaximumSize(QtCore.QSize(60, 30))
@@ -289,20 +299,20 @@ class Ui_MainWindow(object):
         self.stackedWidget.addWidget(self.adjustment)
         self.edit = QtWidgets.QWidget()
         self.edit.setObjectName("edit")
-        self.widget = QtWidgets.QWidget(self.edit)
-        self.widget.setGeometry(QtCore.QRect(2, 22, 161, 191))
-        self.widget.setObjectName("widget")
-        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.widget)
+        self.layoutWidget1 = QtWidgets.QWidget(self.edit)
+        self.layoutWidget1.setGeometry(QtCore.QRect(2, 22, 161, 191))
+        self.layoutWidget1.setObjectName("layoutWidget1")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.layoutWidget1)
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
-        self.pencil_button = QtWidgets.QToolButton(self.widget)
+        self.pencil_button = QtWidgets.QToolButton(self.layoutWidget1)
         self.pencil_button.setMinimumSize(QtCore.QSize(35, 35))
         icon7 = QtGui.QIcon()
         icon7.addPixmap(QtGui.QPixmap("code/icons/pencil.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pencil_button.setIcon(icon7)
         self.pencil_button.setObjectName("pencil_button")
         self.verticalLayout_5.addWidget(self.pencil_button, 0, QtCore.Qt.AlignHCenter)
-        self.eraser_button = QtWidgets.QToolButton(self.widget)
+        self.eraser_button = QtWidgets.QToolButton(self.layoutWidget1)
         self.eraser_button.setMinimumSize(QtCore.QSize(35, 35))
         self.eraser_button.setMaximumSize(QtCore.QSize(16777213, 16777215))
         icon8 = QtGui.QIcon()
@@ -312,27 +322,27 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.addWidget(self.eraser_button, 0, QtCore.Qt.AlignHCenter)
         self.horizontalLayout_11 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_11.setObjectName("horizontalLayout_11")
-        self.thickness_label = QtWidgets.QLabel(self.widget)
+        self.thickness_label = QtWidgets.QLabel(self.layoutWidget1)
         self.thickness_label.setObjectName("thickness_label")
         self.horizontalLayout_11.addWidget(self.thickness_label)
-        self.thickness_value = QtWidgets.QLabel(self.widget)
+        self.thickness_value = QtWidgets.QLabel(self.layoutWidget1)
         self.thickness_value.setObjectName("thickness_value")
         self.horizontalLayout_11.addWidget(self.thickness_value)
         self.verticalLayout_5.addLayout(self.horizontalLayout_11)
-        self.thickness_slider = QtWidgets.QSlider(self.widget)
+        self.thickness_slider = QtWidgets.QSlider(self.layoutWidget1)
         self.thickness_slider.setOrientation(QtCore.Qt.Horizontal)
         self.thickness_slider.setObjectName("thickness_slider")
         self.verticalLayout_5.addWidget(self.thickness_slider)
         self.horizontalLayout_10 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_10.setObjectName("horizontalLayout_10")
-        self.opacity_label = QtWidgets.QLabel(self.widget)
+        self.opacity_label = QtWidgets.QLabel(self.layoutWidget1)
         self.opacity_label.setObjectName("opacity_label")
         self.horizontalLayout_10.addWidget(self.opacity_label)
-        self.opacity_value = QtWidgets.QLabel(self.widget)
+        self.opacity_value = QtWidgets.QLabel(self.layoutWidget1)
         self.opacity_value.setObjectName("opacity_value")
         self.horizontalLayout_10.addWidget(self.opacity_value)
         self.verticalLayout_5.addLayout(self.horizontalLayout_10)
-        self.opacity_slider = QtWidgets.QSlider(self.widget)
+        self.opacity_slider = QtWidgets.QSlider(self.layoutWidget1)
         self.opacity_slider.setOrientation(QtCore.Qt.Horizontal)
         self.opacity_slider.setObjectName("opacity_slider")
         self.verticalLayout_5.addWidget(self.opacity_slider)
@@ -362,12 +372,12 @@ class Ui_MainWindow(object):
         self.gridLayout.addLayout(self.verticalLayout, 1, 0, 2, 1)
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setAutoFillBackground(False)
-        self.label_2.setText("")
-        self.label_2.setScaledContents(True)
-        self.label_2.setObjectName("label_2")
-        self.verticalLayout_2.addWidget(self.label_2)
+        self.image_label = QtWidgets.QLabel(self.centralwidget)
+        self.image_label.setAutoFillBackground(False)
+        self.image_label.setText("")
+        self.image_label.setScaledContents(True)
+        self.image_label.setObjectName("image_label")
+        self.verticalLayout_2.addWidget(self.image_label)
         self.gridLayout.addLayout(self.verticalLayout_2, 1, 3, 2, 2)
         self.verticalLayout_3 = QtWidgets.QVBoxLayout()
         self.verticalLayout_3.setObjectName("verticalLayout_3")
@@ -510,6 +520,61 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.stackedWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+
+
+    # new detect code here
+
+    def loadImage(self):
+        # Open a file dialog to select an image file
+        options = QFileDialog.Options()
+        options |= QFileDialog.DontUseNativeDialog
+        file_filter = "Image (*.jpg *.jpeg *.png)"
+        self.filename, _ = QFileDialog.getOpenFileName(
+            None, "Open Image", "", file_filter, options=options)
+
+        if self.filename:
+            # Read the image from the selected file
+            self.image = cv2.imread(self.filename)
+            self.setPhoto(self.image)
+            # Store the file path
+            self.image_path = self.filename
+            self.imageInformation.clear()
+
+    def setPhoto(self, image):
+        """This function will take image input and resize it
+                only for display purpose and convert it to QImage to set at the label.
+                """
+        self.tmp = image
+        image = imutils.resize(image, width=512)
+        frame = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        image = QImage(
+                frame, frame.shape[1], frame.shape[0], frame.strides[0], QImage.Format_RGB888)
+        self.image_label.setPixmap(QtGui.QPixmap.fromImage(image))
+
+    def scanImage(self):
+        # Load the pre-trained model for breast cancer detection
+        # model = load_model('breast_cancer_model_after_research_1.model')
+        model = load_model('breast_cancer_model_after_research_1.model')
+
+        # Load and preprocess the selected image
+        img = image.load_img(self.image_path, target_size=(256, 256))
+        img_array = image.img_to_array(img)
+        img_array = np.expand_dims(img_array, axis=0)
+        img_array = img_array / 255.0
+
+        # Make a prediction using the loaded model
+        prediction = model.predict(img_array)[0]
+        if prediction > 0.5:
+            result = 'Cancerous'
+        else:
+            result = 'Non-cancerous'
+
+        # Display the result and probability on the labels
+        self.imageInformation.setText(
+            'Result: {}, \nProbability: {}'.format(result, prediction[0]))
+
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
