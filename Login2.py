@@ -9,15 +9,17 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from ImageEditor import MainWindow
+from ImageEditor2 import Ui_MainWindow
 import mysql.connector as mc
+
 
 class Ui_Form(object):
 
-    def __init__(self) -> None:
-       self.main_win = QtWidgets.QMainWindow()
-       self.Ui = MainWindow()
-       self.Ui.setupUi(self.main_win)
+    def ImageProcessor(self):
+        self.window2 =  QtWidgets.QMainWindow()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self.window2)
+        self.window2.show()
 
     def setupUi(self, Form):
         Form.setObjectName("Form")
@@ -27,8 +29,8 @@ class Ui_Form(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout(Form)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.Background = QtWidgets.QStackedWidget(Form)
-        self.Background.setStyleSheet("background-color: rgb(31,31, 31);\n"
-"border: none;")
+        self.Background.setStyleSheet("background-color: rgb(31, 31, 31);\n"
+                                      "border: none;")
         self.Background.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.Background.setFrameShadow(QtWidgets.QFrame.Raised)
         self.Background.setObjectName("Background")
@@ -44,14 +46,14 @@ class Ui_Form(object):
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.label_2 = QtWidgets.QLabel(self.frame_2)
         self.label_2.setStyleSheet("font: 20pt \"MS Shell Dlg 2\";\n"
-"color: rgb(255, 255, 255);")
+                                   "color: rgb(255, 255, 255);")
         self.label_2.setObjectName("label_2")
         self.verticalLayout_4.addWidget(self.label_2, 0, QtCore.Qt.AlignHCenter)
         self.label = QtWidgets.QLabel(self.frame_2)
         self.label.setMinimumSize(QtCore.QSize(100, 100))
         self.label.setMaximumSize(QtCore.QSize(100, 100))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("code/icons/user.png"))
+        self.label.setPixmap(QtGui.QPixmap("Icons/login.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.verticalLayout_4.addWidget(self.label, 0, QtCore.Qt.AlignHCenter)
@@ -66,27 +68,27 @@ class Ui_Form(object):
         self.usernameInput = QtWidgets.QLineEdit(self.frame_3)
         self.usernameInput.setMinimumSize(QtCore.QSize(35, 35))
         self.usernameInput.setStyleSheet("font: 16pt \"MS Shell Dlg 2\";\n"
-"background-color: rgba(85, 85, 85, 15);\n"
-"color: rgb(255, 255, 255);\n"
-"border: none;\n"
-"border-radius: 2px;\n"
-"border-bottom-style: solid;\n"
-"border-bottom-width: 2px;\n"
-"border-bottom-color: rgba(255, 255, 255, 150);")
+                                         "background-color: rgba(85, 85, 85, 15);\n"
+                                         "color: rgb(255, 255, 255);\n"
+                                         "border: none;\n"
+                                         "border-radius: 2px;\n"
+                                         "border-bottom-style: solid;\n"
+                                         "border-bottom-width: 2px;\n"
+                                         "border-bottom-color: rgba(255, 255, 255, 150);")
         self.usernameInput.setObjectName("usernameInput")
         self.verticalLayout_2.addWidget(self.usernameInput)
         self.passwordInput = QtWidgets.QLineEdit(self.frame_3)
         self.passwordInput.setMinimumSize(QtCore.QSize(0, 35))
         self.passwordInput.setMaximumSize(QtCore.QSize(16777215, 35))
         self.passwordInput.setStyleSheet("font: 16pt \"MS Shell Dlg 2\";\n"
-"background-color: rgba(85, 85, 85, 15);\n"
-"color: rgb(255, 255, 255);\n"
-"border: none;\n"
-"border-radius: 2px;\n"
-"border-bottom-style: solid;\n"
-"border-bottom-width: 2px;\n"
-"border-bottom-color: rgba(255, 255, 255, 150);\n"
-"")
+                                         "background-color: rgba(85, 85, 85, 15);\n"
+                                         "color: rgb(255, 255, 255);\n"
+                                         "border: none;\n"
+                                         "border-radius: 2px;\n"
+                                         "border-bottom-style: solid;\n"
+                                         "border-bottom-width: 2px;\n"
+                                         "border-bottom-color: rgba(255, 255, 255, 150);\n"
+                                         "")
         self.passwordInput.setEchoMode(QtWidgets.QLineEdit.Password)
         self.passwordInput.setObjectName("passwordInput")
         self.verticalLayout_2.addWidget(self.passwordInput)
@@ -104,7 +106,7 @@ class Ui_Form(object):
         font.setPointSize(16)
         self.loginButton.setFont(font)
         self.loginButton.setStyleSheet("background-color: rgb(255, 255, 255);\n"
-"border-radius: 10px")
+                                       "border-radius: 10px")
         self.loginButton.setObjectName("loginButton")
         self.verticalLayout_3.addWidget(self.loginButton, 0, QtCore.Qt.AlignHCenter)
         self.loginButton.clicked.connect(self.login)
@@ -114,17 +116,17 @@ class Ui_Form(object):
         font.setPointSize(12)
         self.forgotPassword.setFont(font)
         self.forgotPassword.setStyleSheet("QToolButton {\n"
-"    color: rgb(255, 255, 255);\n"
-"}\n"
-"QToolButton::hover{\n"
-"    color: blue;\n"
-"}")
+                                          "    color: rgb(255, 255, 255);\n"
+                                          "}\n"
+                                          "QToolButton::hover{\n"
+                                          "    color: blue;\n"
+                                          "}")
         self.forgotPassword.setObjectName("forgotPassword")
         self.verticalLayout_3.addWidget(self.forgotPassword, 0, QtCore.Qt.AlignHCenter)
         self.labelResult = QtWidgets.QLabel(self.frame_4)
         self.labelResult.setStyleSheet("font: 12pt \"MS Shell Dlg 2\";\n"
-"color: rgb(255, 0, 15);\n"
-"color: rgb(221, 0, 0);")
+                                       "color: rgb(255, 0, 15);\n"
+                                       "color: rgb(221, 0, 0);")
         self.labelResult.setText("")
         self.labelResult.setObjectName("labelResult")
         self.verticalLayout_3.addWidget(self.labelResult, 0, QtCore.Qt.AlignHCenter)
@@ -149,8 +151,7 @@ class Ui_Form(object):
             )
 
             mycursor = mydb.cursor()
-            query = "SELECT * FROM radiologists WHERE username = '%s' AND radpassword = '%s'" % (
-                username, password)
+            query = "SELECT * FROM radiologists WHERE username = '%s' AND radpassword = '%s'" % (username, password)
             mycursor.execute(query)
             result = mycursor.fetchone()
 
@@ -159,23 +160,28 @@ class Ui_Form(object):
 
             else:
                 self.labelResult.setText("You are logged in")
-                self.main_win.show()
+                self.window2 =  QtWidgets.QMainWindow()
+                self.ui = Ui_MainWindow()
+                self.ui.setupUi(self.window2)
+                self.window2.show()
+                Form.close()
 
         except mc.Error as e:
             self.labelResult.setText("Cannot connect to server")
 
+
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Sign In"))
+        Form.setWindowTitle(_translate("Form", "Form"))
         self.label_2.setText(_translate("Form", "BCDS LOGIN"))
         self.usernameInput.setPlaceholderText(_translate("Form", "Username"))
         self.passwordInput.setPlaceholderText(_translate("Form", "Password"))
         self.loginButton.setText(_translate("Form", "Log In"))
         self.forgotPassword.setText(_translate("Form", "Forgot Password?"))
 
-
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Form = QtWidgets.QWidget()
     ui = Ui_Form()

@@ -58,7 +58,6 @@ class Ui_MainWindow(object):
         self.detect_button.setFlat(False)
         self.detect_button.setObjectName("detect_button")
         self.horizontalLayout_2.addWidget(self.detect_button)
-        self.detect_button.clicked.connect(self.scanImage)
         self.generate_report = QtWidgets.QPushButton(self.centralwidget)
         self.generate_report.setMaximumSize(QtCore.QSize(60, 23))
         self.generate_report.setStyleSheet("radius {\n"
@@ -126,7 +125,6 @@ class Ui_MainWindow(object):
         self.insert_new.setFlat(True)
         self.insert_new.setObjectName("insert_new")
         self.horizontalLayout.addWidget(self.insert_new)
-        self.insert_new.clicked.connect(self.loadImage)
         self.open_folder = QtWidgets.QPushButton(self.centralwidget)
         self.open_folder.setMinimumSize(QtCore.QSize(60, 30))
         self.open_folder.setMaximumSize(QtCore.QSize(60, 30))
@@ -517,14 +515,41 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuSettings.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
 
-        # code here
-        self.stackedWidget.setCurrentWidget(self.imageInfo)
-
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+        # actionListeners here
+        self.insert_new.clicked.connect(self.loadImage)
+        self.actionOpen_Image.triggered.connect(self.loadImage)
+        self.actionQuit.triggered.connect(exit)
+        self.detect_button.clicked.connect(self.scanImage)
+        self.adjustment_button.clicked.connect(self.showAdjustment)
+        self.text_button.clicked.connect(self.showAddText)
+        self.editImage_button.clicked.connect(self.showEditImage)
+        self.info_button.clicked.connect(self.showInfo)
+        self.contrast_slider.valueChanged.connect(self.update_image)
+        self.brightness_slider.valueChanged.connect(self.update_image)
+        self.saturation_slider.valueChanged.connect(self.adjust_saturation)
+        self.exposure_slider.valueChanged.connect(self.adjust_exposure)
+        self.warmth_slider.valueChanged.connect(self.adjust_warmth)
 
+
+
+
+
+    # STACKED WIDGETS
+    def showAdjustment(self):
+        self.stackedWidget.setCurrentWidget(self.adjustment)
+
+    def showEditImage(self):
+        self.stackedWidget.setCurrentWidget(self.edit)
+
+    def showAddText(self):
+        self.stackedWidget.setCurrentWidget(self.addText)
+
+    def showInfo(self):
+        self.stackedWidget.setCurrentWidget(self.imageInfo)
 
     # new detect code here
 
@@ -534,22 +559,23 @@ class Ui_MainWindow(object):
         options |= QFileDialog.DontUseNativeDialog
         file_filter = "Image (*.jpg *.jpeg *.png)"
         self.filename, _ = QFileDialog.getOpenFileName(
-            None, "Open Image", "", file_filter, options=options)
+                None, "Open Image", "", file_filter, options=options)
 
         if self.filename:
-            # Read the image from the selected file
-            self.image = cv2.imread(self.filename)
-            self.setPhoto(self.image)
-            # Store the file path
-            self.image_path = self.filename
-            self.imageInformation.clear()
+                # Read the image from the selected file
+                self.original_image = cv2.imread(self.filename)
+                self.image = self.original_image.copy()
+                self.setPhoto(self.image)
+                # Store the file path
+                self.image_path = self.filename
+                self.imageInformation.clear()
 
     def setPhoto(self, image):
         """This function will take image input and resize it
-                only for display purpose and convert it to QImage to set at the label.
-                """
+            only for display purpose and convert it to QImage to set at the label.
+            """
         self.tmp = image
-        image = imutils.resize(image, width=512)
+        image = imutils.resize(image, width=256)
         frame = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         image = QImage(
                 frame, frame.shape[1], frame.shape[0], frame.strides[0], QImage.Format_RGB888)
@@ -577,8 +603,153 @@ class Ui_MainWindow(object):
         self.imageInformation.setText(
             'Result: {}, \nProbability: {}'.format(result, prediction[0]))
 
-        # code here
-        self.stackedWidget.setCurrentWidget(self.imageInfo)
+
+     # ADJUSTMENT
+
+    # CONTRAST
+    def convert_cv_to_pixmap(self, cv_img):
+        height, width, channel = cv_img.shape
+        bytes_per_line = 3 * width
+        q_img = QImage(cv_img.data, width, height, bytes_per_line, QImage.Format_RGB888)
+        return QPixmap.fromImage(q_img)
+
+    def update_image(self):
+        # Get the current values of the sliders
+        contrast = self.contrast_slider.value()
+        brightness = self.brightness_slider.value()
+        saturation = self.saturation_slider.value()
+        exposure = self.exposure_slider.value()
+        warmth = self.warmth_slider.value()
+
+        # Apply the contrast and brightness adjustments to the original image
+        alpha = (contrast + 100) / 100
+        beta = brightness - 50
+        self.image = cv2.convertScaleAbs(
+                self.original_image, alpha=alpha, beta=beta)
+
+        # Apply the saturation adjustment to the image
+        hsv_image = cv2.cvtColor(self.image, cv2.COLOR_RGB2HSV)
+        hsv_image[:, :, 1] = hsv_image[:, :, 1] + saturation
+        self.image = cv2.cvtColor(hsv_image, cv2.COLOR_HSV2RGB)
+
+        # Apply the exposure adjustment to the image
+        lab_image = cv2.cvtColor(self.image, cv2.COLOR_RGB2LAB)
+        l_channel, a_channel, b_channel = cv2.split(lab_image)
+        l_channel = cv2.add(l_channel, exposure)
+        lab_image = cv2.merge((l_channel, a_channel, b_channel))
+        self.image = cv2.cvtColor(lab_image, cv2.COLOR_LAB2RGB)
+
+        # Apply the warmth adjustment to the image
+        h, w, ch = self.image.shape
+        overlay = np.zeros((h, w, ch), dtype='uint8')
+        if warmth > 0:
+                overlay[:, :, 0] = warmth
+        else:
+                overlay[:, :, 2] = -warmth
+        self.image = cv2.addWeighted(self.image, 1, overlay, 1, 0)
+
+        # Update the displayed image
+        self.image_label.setPixmap(self.convert_cv_to_pixmap(self.image))
+
+
+
+
+    # BRIGHTNESS
+    def adjust_brightness(self, value):
+        """
+        Adjusts the brightness of the image.
+        """
+        image = self.original_image.copy()
+        alpha = 1.0
+        beta = value
+
+        # Apply brightness adjustment
+        adjusted_image = cv2.convertScaleAbs(image, alpha=alpha, beta=beta)
+
+        # Display the adjusted image in the label
+        qimage = QtGui.QImage(
+            adjusted_image.data, adjusted_image.shape[1], adjusted_image.shape[0], QtGui.QImage.Format_RGB888)
+        pixmap = QtGui.QPixmap.fromImage(qimage)
+        self.image_label.setPixmap(pixmap)
+
+
+    # SATURATION
+
+    def adjust_saturation(self, value):
+        """
+        Adjusts the saturation of the image and updates the display.
+        """
+        image = self.original_image.copy()
+
+        # Convert image to HSV color space
+        hsv_image = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
+
+        # Adjust saturation value
+        hsv_image[:, :, 1] = hsv_image[:, :, 1] + value
+
+        # Convert image back to RGB color space
+        image = cv2.cvtColor(hsv_image, cv2.COLOR_HSV2RGB)
+
+        # Display the updated image in the label
+        qimage = QtGui.QImage(
+            image.data, image.shape[1], image.shape[0], QtGui.QImage.Format_RGB888)
+        pixmap = QtGui.QPixmap.fromImage(qimage)
+        self.image_label.setPixmap(pixmap)
+
+    # EXPOSURE
+    def adjust_exposure(self, value):
+        """
+        Adjusts the exposure of the image and displays the result in the image label.
+        """
+        # Convert the image to LAB color space
+        lab_image = cv2.cvtColor(self.original_image, cv2.COLOR_RGB2LAB)
+
+        # Split the channels
+        l_channel, a_channel, b_channel = cv2.split(lab_image)
+
+        # Scale the L channel
+        l_channel = cv2.add(l_channel, value)
+
+        # Merge the channels back
+        lab_image = cv2.merge((l_channel, a_channel, b_channel))
+
+        # Convert the image back to RGB color space
+        result_image = cv2.cvtColor(lab_image, cv2.COLOR_LAB2RGB)
+
+        # Display the result in the image label
+        qimage = QtGui.QImage(result_image.data, result_image.shape[1], result_image.shape[0], QtGui.QImage.Format_RGB888)
+        pixmap = QtGui.QPixmap.fromImage(qimage)
+        self.image_label.setPixmap(pixmap)
+
+    def adjust_warmth(self, value):
+        """
+        Increases or decreases the warmth of the image based on the value of the slider.
+        """
+        image = self.original_image.copy()
+
+        # Increase or decrease the red and yellow hues of the image
+        if value > 0:
+            red_multiplier = 1 + (value / 100)
+            yellow_multiplier = 1 + (value / 200)
+            matrix = np.array([[red_multiplier, 0, 0],
+                               [0, yellow_multiplier, 0],
+                               [0, 0, 1]])
+        else:
+            blue_multiplier = 1 + (value / 100)
+            green_multiplier = 1 + (value / 200)
+            matrix = np.array([[1, 0, 0],
+                               [0, 1, 0],
+                               [0, 0, blue_multiplier]])
+        image = cv2.transform(image, matrix)
+
+        # Display the adjusted image in the label
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        qimage = QtGui.QImage(
+            image.data, image.shape[1], image.shape[0], QtGui.QImage.Format_RGB888)
+        pixmap = QtGui.QPixmap.fromImage(qimage)
+        self.image_label.setPixmap(pixmap)
+
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate

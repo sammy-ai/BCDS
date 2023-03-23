@@ -299,7 +299,7 @@ color: rgb(255, 255, 255);</string>
 </string>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="imageInfo">
          <widget class="QLabel" name="imageInformation">
@@ -565,7 +565,7 @@ color: rgb(255, 255, 255);</string>
          </widget>
         </widget>
         <widget class="QWidget" name="edit">
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
             <x>2</x>
@@ -749,7 +749,7 @@ color: rgb(255, 255, 255);</string>
     <item row="1" column="3" rowspan="2" colspan="2">
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="image_label">
         <property name="autoFillBackground">
          <bool>false</bool>
         </property>
