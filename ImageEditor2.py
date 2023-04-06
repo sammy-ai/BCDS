@@ -24,8 +24,8 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1594, 830)
         MainWindow.setStyleSheet("background-color: rgb(165, 165, 165);\n"
-"color: rgb(255, 255, 255);\n"
-"background-color: rgb(31, 31, 31);")
+                                 "color: rgb(255, 255, 255);\n"
+                                 "background-color: rgb(31, 31, 31);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -35,7 +35,8 @@ class Ui_MainWindow(object):
         self.undo_button = QtWidgets.QPushButton(self.centralwidget)
         self.undo_button.setMaximumSize(QtCore.QSize(65, 16777215))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("code/icons/undo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("code/icons/undo.png"),
+                       QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.undo_button.setIcon(icon)
         self.undo_button.setDefault(False)
         self.undo_button.setFlat(True)
@@ -44,7 +45,8 @@ class Ui_MainWindow(object):
         self.redo_button = QtWidgets.QPushButton(self.centralwidget)
         self.redo_button.setMaximumSize(QtCore.QSize(65, 16777215))
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("code/icons/redo.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("code/icons/redo.png"),
+                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.redo_button.setIcon(icon1)
         self.redo_button.setFlat(True)
         self.redo_button.setObjectName("redo_button")
@@ -53,7 +55,8 @@ class Ui_MainWindow(object):
         self.detect_button.setMaximumSize(QtCore.QSize(60, 16777215))
         self.detect_button.setStyleSheet("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("code/icons/radar.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap("code/icons/radar.png"),
+                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.detect_button.setIcon(icon2)
         self.detect_button.setFlat(False)
         self.detect_button.setObjectName("detect_button")
@@ -61,15 +64,16 @@ class Ui_MainWindow(object):
         self.generate_report = QtWidgets.QPushButton(self.centralwidget)
         self.generate_report.setMaximumSize(QtCore.QSize(60, 23))
         self.generate_report.setStyleSheet("radius {\n"
-"    10px;\n"
-"}")
+                                           "    10px;\n"
+                                           "}")
         self.generate_report.setObjectName("generate_report")
         self.horizontalLayout_2.addWidget(self.generate_report)
         self.profile = QtWidgets.QPushButton(self.centralwidget)
         self.profile.setMaximumSize(QtCore.QSize(60, 16777215))
         self.profile.setText("")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("code/icons/user.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap("code/icons/user.png"),
+                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.profile.setIcon(icon3)
         self.profile.setFlat(True)
         self.profile.setObjectName("profile")
@@ -85,7 +89,8 @@ class Ui_MainWindow(object):
         self.label.setFont(font)
         self.label.setStyleSheet("font: 75 8pt \"MS Shell Dlg 2\";")
         self.label.setObjectName("label")
-        self.gridLayout.addWidget(self.label, 0, 3, 1, 1, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignVCenter)
+        self.gridLayout.addWidget(
+            self.label, 0, 3, 1, 1, QtCore.Qt.AlignHCenter | QtCore.Qt.AlignVCenter)
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.prev_button = QtWidgets.QPushButton(self.centralwidget)
@@ -117,9 +122,10 @@ class Ui_MainWindow(object):
         self.insert_new.setMinimumSize(QtCore.QSize(60, 30))
         self.insert_new.setMaximumSize(QtCore.QSize(60, 30))
         self.insert_new.setStyleSheet("color: rgb(255, 255, 255);\n"
-"color: rgb(255, 255, 255);")
+                                      "color: rgb(255, 255, 255);")
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("code/icons/insert.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon4.addPixmap(QtGui.QPixmap("code/icons/insert.png"),
+                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.insert_new.setIcon(icon4)
         self.insert_new.setDefault(True)
         self.insert_new.setFlat(True)
@@ -130,7 +136,8 @@ class Ui_MainWindow(object):
         self.open_folder.setMaximumSize(QtCore.QSize(60, 30))
         self.open_folder.setText("")
         icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap("code/icons/folder.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon5.addPixmap(QtGui.QPixmap("code/icons/folder.png"),
+                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.open_folder.setIcon(icon5)
         self.open_folder.setDefault(True)
         self.open_folder.setFlat(True)
@@ -141,7 +148,8 @@ class Ui_MainWindow(object):
         self.save_button.setMaximumSize(QtCore.QSize(60, 30))
         self.save_button.setText("")
         icon6 = QtGui.QIcon()
-        icon6.addPixmap(QtGui.QPixmap("code/icons/save.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon6.addPixmap(QtGui.QPixmap("code/icons/save.png"),
+                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.save_button.setIcon(icon6)
         self.save_button.setDefault(True)
         self.save_button.setFlat(True)
@@ -153,14 +161,15 @@ class Ui_MainWindow(object):
         self.stackedWidget = QtWidgets.QStackedWidget(self.centralwidget)
         self.stackedWidget.setMaximumSize(QtCore.QSize(200, 16777215))
         self.stackedWidget.setStyleSheet("background-color: rgb(32, 32, 32);\n"
-"")
+                                         "")
         self.stackedWidget.setObjectName("stackedWidget")
         self.imageInfo = QtWidgets.QWidget()
         self.imageInfo.setObjectName("imageInfo")
         self.imageInformation = QtWidgets.QLabel(self.imageInfo)
         self.imageInformation.setGeometry(QtCore.QRect(10, 60, 181, 641))
         self.imageInformation.setText("")
-        self.imageInformation.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.imageInformation.setAlignment(
+            QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
         self.imageInformation.setObjectName("imageInformation")
         self.info = QtWidgets.QLabel(self.imageInfo)
         self.info.setGeometry(QtCore.QRect(60, 10, 61, 20))
@@ -202,6 +211,9 @@ class Ui_MainWindow(object):
         self.brightness_slider = QtWidgets.QSlider(self.layoutWidget)
         self.brightness_slider.setOrientation(QtCore.Qt.Horizontal)
         self.brightness_slider.setObjectName("brightness_slider")
+        self.brightness_slider.setMinimum(-100)
+        self.brightness_slider.setMaximum(100)
+        self.brightness_slider.setValue(0)
         self.verticalLayout_4.addWidget(self.brightness_slider)
         self.horizontalLayout_5 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
@@ -219,6 +231,9 @@ class Ui_MainWindow(object):
         self.exposure_slider = QtWidgets.QSlider(self.layoutWidget)
         self.exposure_slider.setOrientation(QtCore.Qt.Horizontal)
         self.exposure_slider.setObjectName("exposure_slider")
+        self.exposure_slider.setMinimum(-100)
+        self.exposure_slider.setMaximum(100)
+        self.exposure_slider.setValue(0)
         self.verticalLayout_4.addWidget(self.exposure_slider)
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
@@ -236,6 +251,9 @@ class Ui_MainWindow(object):
         self.contrast_slider = QtWidgets.QSlider(self.layoutWidget)
         self.contrast_slider.setOrientation(QtCore.Qt.Horizontal)
         self.contrast_slider.setObjectName("contrast_slider")
+        self.contrast_slider.setMinimum(-100)
+        self.contrast_slider.setMaximum(100)
+        self.contrast_slider.setValue(0)
         self.verticalLayout_4.addWidget(self.contrast_slider)
         self.color_label = QtWidgets.QLabel(self.layoutWidget)
         font = QtGui.QFont()
@@ -259,6 +277,9 @@ class Ui_MainWindow(object):
         self.saturation_slider = QtWidgets.QSlider(self.layoutWidget)
         self.saturation_slider.setOrientation(QtCore.Qt.Horizontal)
         self.saturation_slider.setObjectName("saturation_slider")
+        self.saturation_slider.setMinimum(-100)
+        self.saturation_slider.setMaximum(100)
+        self.saturation_slider.setValue(0)
         self.verticalLayout_4.addWidget(self.saturation_slider)
         self.horizontalLayout_8 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_8.setObjectName("horizontalLayout_8")
@@ -276,6 +297,9 @@ class Ui_MainWindow(object):
         self.warmth_slider = QtWidgets.QSlider(self.layoutWidget)
         self.warmth_slider.setOrientation(QtCore.Qt.Horizontal)
         self.warmth_slider.setObjectName("warmth_slider")
+        self.warmth_slider.setMinimum(-100)
+        self.warmth_slider.setMaximum(100)
+        self.warmth_slider.setValue(0)
         self.verticalLayout_4.addWidget(self.warmth_slider)
         self.horizontalLayout_9 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_9.setObjectName("horizontalLayout_9")
@@ -293,6 +317,9 @@ class Ui_MainWindow(object):
         self.tint_slider = QtWidgets.QSlider(self.layoutWidget)
         self.tint_slider.setOrientation(QtCore.Qt.Horizontal)
         self.tint_slider.setObjectName("tint_slider")
+        self.tint_slider.setMinimum(-100)
+        self.tint_slider.setMaximum(100)
+        self.tint_slider.setValue(0)
         self.verticalLayout_4.addWidget(self.tint_slider)
         self.stackedWidget.addWidget(self.adjustment)
         self.edit = QtWidgets.QWidget()
@@ -306,18 +333,22 @@ class Ui_MainWindow(object):
         self.pencil_button = QtWidgets.QToolButton(self.layoutWidget1)
         self.pencil_button.setMinimumSize(QtCore.QSize(35, 35))
         icon7 = QtGui.QIcon()
-        icon7.addPixmap(QtGui.QPixmap("code/icons/pencil.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon7.addPixmap(QtGui.QPixmap("code/icons/pencil.png"),
+                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.pencil_button.setIcon(icon7)
         self.pencil_button.setObjectName("pencil_button")
-        self.verticalLayout_5.addWidget(self.pencil_button, 0, QtCore.Qt.AlignHCenter)
+        self.verticalLayout_5.addWidget(
+            self.pencil_button, 0, QtCore.Qt.AlignHCenter)
         self.eraser_button = QtWidgets.QToolButton(self.layoutWidget1)
         self.eraser_button.setMinimumSize(QtCore.QSize(35, 35))
         self.eraser_button.setMaximumSize(QtCore.QSize(16777213, 16777215))
         icon8 = QtGui.QIcon()
-        icon8.addPixmap(QtGui.QPixmap("code/icons/eraser.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon8.addPixmap(QtGui.QPixmap("code/icons/eraser.png"),
+                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.eraser_button.setIcon(icon8)
         self.eraser_button.setObjectName("eraser_button")
-        self.verticalLayout_5.addWidget(self.eraser_button, 0, QtCore.Qt.AlignHCenter)
+        self.verticalLayout_5.addWidget(
+            self.eraser_button, 0, QtCore.Qt.AlignHCenter)
         self.horizontalLayout_11 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_11.setObjectName("horizontalLayout_11")
         self.thickness_label = QtWidgets.QLabel(self.layoutWidget1)
@@ -383,7 +414,8 @@ class Ui_MainWindow(object):
         self.zoom_in.setMaximumSize(QtCore.QSize(60, 16777215))
         self.zoom_in.setText("")
         icon9 = QtGui.QIcon()
-        icon9.addPixmap(QtGui.QPixmap("code/icons/zoom-in.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon9.addPixmap(QtGui.QPixmap("code/icons/zoom-in.png"),
+                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.zoom_in.setIcon(icon9)
         self.zoom_in.setObjectName("zoom_in")
         self.verticalLayout_3.addWidget(self.zoom_in)
@@ -391,7 +423,8 @@ class Ui_MainWindow(object):
         self.zoom_out.setMaximumSize(QtCore.QSize(60, 16777215))
         self.zoom_out.setText("")
         icon10 = QtGui.QIcon()
-        icon10.addPixmap(QtGui.QPixmap("code/icons/zoom-out.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon10.addPixmap(QtGui.QPixmap("code/icons/zoom-out.png"),
+                         QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.zoom_out.setIcon(icon10)
         self.zoom_out.setObjectName("zoom_out")
         self.verticalLayout_3.addWidget(self.zoom_out)
@@ -399,7 +432,8 @@ class Ui_MainWindow(object):
         self.adjustment_button.setMaximumSize(QtCore.QSize(60, 16777215))
         self.adjustment_button.setText("")
         icon11 = QtGui.QIcon()
-        icon11.addPixmap(QtGui.QPixmap("code/icons/brightness.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon11.addPixmap(QtGui.QPixmap("code/icons/brightness.png"),
+                         QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.adjustment_button.setIcon(icon11)
         self.adjustment_button.setObjectName("adjustment_button")
         self.verticalLayout_3.addWidget(self.adjustment_button)
@@ -407,7 +441,8 @@ class Ui_MainWindow(object):
         self.rotate_button.setMaximumSize(QtCore.QSize(60, 16777215))
         self.rotate_button.setText("")
         icon12 = QtGui.QIcon()
-        icon12.addPixmap(QtGui.QPixmap("code/icons/rotate_image.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon12.addPixmap(QtGui.QPixmap(
+            "code/icons/rotate_image.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.rotate_button.setIcon(icon12)
         self.rotate_button.setObjectName("rotate_button")
         self.verticalLayout_3.addWidget(self.rotate_button)
@@ -415,14 +450,16 @@ class Ui_MainWindow(object):
         self.editImage_button.setMaximumSize(QtCore.QSize(60, 16777215))
         self.editImage_button.setText("")
         icon13 = QtGui.QIcon()
-        icon13.addPixmap(QtGui.QPixmap("code/icons/edit-image.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon13.addPixmap(QtGui.QPixmap("code/icons/edit-image.png"),
+                         QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.editImage_button.setIcon(icon13)
         self.editImage_button.setObjectName("editImage_button")
         self.verticalLayout_3.addWidget(self.editImage_button)
         self.split_button = QtWidgets.QPushButton(self.centralwidget)
         self.split_button.setMaximumSize(QtCore.QSize(60, 16777215))
         icon14 = QtGui.QIcon()
-        icon14.addPixmap(QtGui.QPixmap("code/icons/split-screen.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon14.addPixmap(QtGui.QPixmap(
+            "code/icons/split-screen.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.split_button.setIcon(icon14)
         self.split_button.setObjectName("split_button")
         self.verticalLayout_3.addWidget(self.split_button)
@@ -430,7 +467,8 @@ class Ui_MainWindow(object):
         self.expand_button.setMaximumSize(QtCore.QSize(60, 16777215))
         self.expand_button.setText("")
         icon15 = QtGui.QIcon()
-        icon15.addPixmap(QtGui.QPixmap("code/icons/expand.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon15.addPixmap(QtGui.QPixmap("code/icons/expand.png"),
+                         QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.expand_button.setIcon(icon15)
         self.expand_button.setObjectName("expand_button")
         self.verticalLayout_3.addWidget(self.expand_button)
@@ -438,40 +476,44 @@ class Ui_MainWindow(object):
         self.text_button.setMaximumSize(QtCore.QSize(60, 16777215))
         self.text_button.setText("")
         icon16 = QtGui.QIcon()
-        icon16.addPixmap(QtGui.QPixmap("code/icons/text.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon16.addPixmap(QtGui.QPixmap("code/icons/text.png"),
+                         QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.text_button.setIcon(icon16)
         self.text_button.setObjectName("text_button")
         self.verticalLayout_3.addWidget(self.text_button)
         self.lock_button = QtWidgets.QPushButton(self.centralwidget)
         self.lock_button.setMaximumSize(QtCore.QSize(60, 16777215))
         icon17 = QtGui.QIcon()
-        icon17.addPixmap(QtGui.QPixmap("code/icons/padlock.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon17.addPixmap(QtGui.QPixmap("code/icons/padlock.png"),
+                         QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.lock_button.setIcon(icon17)
         self.lock_button.setObjectName("lock_button")
         self.verticalLayout_3.addWidget(self.lock_button)
         self.info_button = QtWidgets.QPushButton(self.centralwidget)
         self.info_button.setMaximumSize(QtCore.QSize(60, 16777215))
         icon18 = QtGui.QIcon()
-        icon18.addPixmap(QtGui.QPixmap("code/icons/info.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon18.addPixmap(QtGui.QPixmap("code/icons/info.png"),
+                         QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.info_button.setIcon(icon18)
         self.info_button.setObjectName("info_button")
         self.verticalLayout_3.addWidget(self.info_button)
         self.gridLayout.addLayout(self.verticalLayout_3, 1, 1, 2, 1)
-        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.gridLayout.addItem(spacerItem, 1, 2, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1594, 21))
         self.menubar.setStyleSheet("menuFile:hover\n"
-"{\n"
-"    color: blue;\n"
-"}")
+                                   "{\n"
+                                   "    color: blue;\n"
+                                   "}")
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(self.menubar)
         self.menuFile.setAutoFillBackground(False)
         self.menuFile.setStyleSheet("QMenu:hover{\n"
-"    background-color: rgb(36, 36, 36);\n"
-"}")
+                                    "    background-color: rgb(36, 36, 36);\n"
+                                    "}")
         self.menuFile.setObjectName("menuFile")
         self.menuSettings = QtWidgets.QMenu(self.menubar)
         self.menuSettings.setObjectName("menuSettings")
@@ -491,7 +533,8 @@ class Ui_MainWindow(object):
         self.actionSave_As.setObjectName("actionSave_As")
         self.actionShare = QtWidgets.QAction(MainWindow)
         icon19 = QtGui.QIcon()
-        icon19.addPixmap(QtGui.QPixmap("code/icons/share.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon19.addPixmap(QtGui.QPixmap("code/icons/share.png"),
+                         QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionShare.setIcon(icon19)
         self.actionShare.setObjectName("actionShare")
         self.actionQuit = QtWidgets.QAction(MainWindow)
@@ -533,12 +576,10 @@ class Ui_MainWindow(object):
         self.saturation_slider.valueChanged.connect(self.adjust_saturation)
         self.exposure_slider.valueChanged.connect(self.adjust_exposure)
         self.warmth_slider.valueChanged.connect(self.adjust_warmth)
-
-
-
-
+        self.tint_slider.valueChanged.connect(self.adjust_tint)
 
     # STACKED WIDGETS
+
     def showAdjustment(self):
         self.stackedWidget.setCurrentWidget(self.adjustment)
 
@@ -559,16 +600,16 @@ class Ui_MainWindow(object):
         options |= QFileDialog.DontUseNativeDialog
         file_filter = "Image (*.jpg *.jpeg *.png)"
         self.filename, _ = QFileDialog.getOpenFileName(
-                None, "Open Image", "", file_filter, options=options)
+            None, "Open Image", "", file_filter, options=options)
 
         if self.filename:
-                # Read the image from the selected file
-                self.original_image = cv2.imread(self.filename)
-                self.image = self.original_image.copy()
-                self.setPhoto(self.image)
-                # Store the file path
-                self.image_path = self.filename
-                self.imageInformation.clear()
+            # Read the image from the selected file
+            self.original_image = cv2.imread(self.filename)
+            self.image = self.original_image.copy()
+            self.setPhoto(self.image)
+            # Store the file path
+            self.image_path = self.filename
+            self.imageInformation.clear()
 
     def setPhoto(self, image):
         """This function will take image input and resize it
@@ -578,7 +619,7 @@ class Ui_MainWindow(object):
         image = imutils.resize(image, width=256)
         frame = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         image = QImage(
-                frame, frame.shape[1], frame.shape[0], frame.strides[0], QImage.Format_RGB888)
+            frame, frame.shape[1], frame.shape[0], frame.strides[0], QImage.Format_RGB888)
         self.image_label.setPixmap(QtGui.QPixmap.fromImage(image))
 
     def scanImage(self):
@@ -603,14 +644,15 @@ class Ui_MainWindow(object):
         self.imageInformation.setText(
             'Result: {}, \nProbability: {}'.format(result, prediction[0]))
 
-
      # ADJUSTMENT
 
     # CONTRAST
+
     def convert_cv_to_pixmap(self, cv_img):
         height, width, channel = cv_img.shape
         bytes_per_line = 3 * width
-        q_img = QImage(cv_img.data, width, height, bytes_per_line, QImage.Format_RGB888)
+        q_img = QImage(cv_img.data, width, height,
+                       bytes_per_line, QImage.Format_RGB888)
         return QPixmap.fromImage(q_img)
 
     def update_image(self):
@@ -625,7 +667,7 @@ class Ui_MainWindow(object):
         alpha = (contrast + 100) / 100
         beta = brightness - 50
         self.image = cv2.convertScaleAbs(
-                self.original_image, alpha=alpha, beta=beta)
+            self.original_image, alpha=alpha, beta=beta)
 
         # Apply the saturation adjustment to the image
         hsv_image = cv2.cvtColor(self.image, cv2.COLOR_RGB2HSV)
@@ -640,21 +682,14 @@ class Ui_MainWindow(object):
         self.image = cv2.cvtColor(lab_image, cv2.COLOR_LAB2RGB)
 
         # Apply the warmth adjustment to the image
-        h, w, ch = self.image.shape
-        overlay = np.zeros((h, w, ch), dtype='uint8')
-        if warmth > 0:
-                overlay[:, :, 0] = warmth
-        else:
-                overlay[:, :, 2] = -warmth
-        self.image = cv2.addWeighted(self.image, 1, overlay, 1, 0)
+        self.adjust_warmth(warmth)
 
         # Update the displayed image
         self.image_label.setPixmap(self.convert_cv_to_pixmap(self.image))
 
 
-
-
     # BRIGHTNESS
+
     def adjust_brightness(self, value):
         """
         Adjusts the brightness of the image.
@@ -671,7 +706,6 @@ class Ui_MainWindow(object):
             adjusted_image.data, adjusted_image.shape[1], adjusted_image.shape[0], QtGui.QImage.Format_RGB888)
         pixmap = QtGui.QPixmap.fromImage(qimage)
         self.image_label.setPixmap(pixmap)
-
 
     # SATURATION
 
@@ -717,37 +751,57 @@ class Ui_MainWindow(object):
         result_image = cv2.cvtColor(lab_image, cv2.COLOR_LAB2RGB)
 
         # Display the result in the image label
-        qimage = QtGui.QImage(result_image.data, result_image.shape[1], result_image.shape[0], QtGui.QImage.Format_RGB888)
+        qimage = QtGui.QImage(
+            result_image.data, result_image.shape[1], result_image.shape[0], QtGui.QImage.Format_RGB888)
         pixmap = QtGui.QPixmap.fromImage(qimage)
         self.image_label.setPixmap(pixmap)
 
+    # WARMTH
     def adjust_warmth(self, value):
         """
-        Increases or decreases the warmth of the image based on the value of the slider.
+        Adjusts the warmth of the image and updates the display.
         """
         image = self.original_image.copy()
 
-        # Increase or decrease the red and yellow hues of the image
+        # Create an overlay to add warmth to the image
+        h, w, ch = image.shape
+        overlay = np.zeros((h, w, ch), dtype='uint8')
         if value > 0:
-            red_multiplier = 1 + (value / 100)
-            yellow_multiplier = 1 + (value / 200)
-            matrix = np.array([[red_multiplier, 0, 0],
-                               [0, yellow_multiplier, 0],
-                               [0, 0, 1]])
+            overlay[:, :, 0] = value
         else:
-            blue_multiplier = 1 + (value / 100)
-            green_multiplier = 1 + (value / 200)
-            matrix = np.array([[1, 0, 0],
-                               [0, 1, 0],
-                               [0, 0, blue_multiplier]])
-        image = cv2.transform(image, matrix)
+            overlay[:, :, 2] = -value
+
+        # Apply the overlay to the image
+        image = cv2.addWeighted(image, 1, overlay, 1, 0)
 
         # Display the adjusted image in the label
-        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         qimage = QtGui.QImage(
             image.data, image.shape[1], image.shape[0], QtGui.QImage.Format_RGB888)
         pixmap = QtGui.QPixmap.fromImage(qimage)
         self.image_label.setPixmap(pixmap)
+
+    # TINT
+    def adjust_tint(self, value):
+        """
+        Adjusts the tint of the image and updates the display.
+        """
+        image = self.original_image.copy()
+
+        # Convert image to HSV color space
+        hsv_image = cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
+
+        # Adjust hue value
+        hsv_image[:, :, 0] = hsv_image[:, :, 0] + value
+
+        # Convert image back to RGB color space
+        image = cv2.cvtColor(hsv_image, cv2.COLOR_HSV2RGB)
+
+        # Display the adjusted image in the label
+        qimage = QtGui.QImage(
+            image.data, image.shape[1], image.shape[0], QtGui.QImage.Format_RGB888)
+        pixmap = QtGui.QPixmap.fromImage(qimage)
+        self.image_label.setPixmap(pixmap)
+
 
 
 
@@ -781,7 +835,8 @@ class Ui_MainWindow(object):
         self.font_combo.setCurrentText(_translate("MainWindow", "Arial"))
         self.font_combo.setItemText(0, _translate("MainWindow", "Arial"))
         self.font_combo.setItemText(1, _translate("MainWindow", "Segoe UI"))
-        self.font_combo.setItemText(2, _translate("MainWindow", "Times New Roman"))
+        self.font_combo.setItemText(
+            2, _translate("MainWindow", "Times New Roman"))
         self.bold_button.setText(_translate("MainWindow", "Bold"))
         self.italics_button.setText(_translate("MainWindow", "Italics"))
         self.split_button.setText(_translate("MainWindow", "Split"))
