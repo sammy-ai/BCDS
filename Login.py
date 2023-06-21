@@ -9,14 +9,14 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from ImageEditor import MainWindow
+from BCDSInterface import Ui_MainWindow
 import mysql.connector as mc
 
 class Ui_Form(object):
 
     def __init__(self) -> None:
        self.main_win = QtWidgets.QMainWindow()
-       self.Ui = MainWindow()
+       self.Ui = Ui_MainWindow()
        self.Ui.setupUi(self.main_win)
 
     def setupUi(self, Form):
@@ -108,6 +108,7 @@ class Ui_Form(object):
         self.loginButton.setObjectName("loginButton")
         self.verticalLayout_3.addWidget(self.loginButton, 0, QtCore.Qt.AlignHCenter)
         self.loginButton.clicked.connect(self.login)
+        self.loginButton.clicked.connect(Form.close)
         self.forgotPassword = QtWidgets.QToolButton(self.frame_4)
         self.forgotPassword.setMinimumSize(QtCore.QSize(120, 35))
         font = QtGui.QFont()
@@ -145,7 +146,7 @@ class Ui_Form(object):
                 host="localhost",
                 user="root",
                 database="health",
-                password="mS50778609@21042001"
+                password="bcancerdsystem"
             )
 
             mycursor = mydb.cursor()
